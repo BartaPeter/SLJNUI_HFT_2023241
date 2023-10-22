@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SLJNUI_HFT_2023241.Models\SLJNUI_HFT_2023241.Models.csproj" />
+    <ProjectReference Include="..\SLJNUI_HFT_2023241.Repository\SLJNUI_HFT_2023241.Repository.csproj" />
+  </ItemGroup>
+
+</Project>
