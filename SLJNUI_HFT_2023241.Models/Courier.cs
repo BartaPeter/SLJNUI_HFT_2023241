@@ -24,11 +24,13 @@ namespace SLJNUI_HFT_2023241.Models
             string[] strings = v.Split('#');
             CourierId = int.Parse(strings[0]);
             CourierName = strings[1];
-            CourierAge = int.Parse(strings[2]);            
+            CourierAge = int.Parse(strings[2]);   
+            Foods = new HashSet<Food>();
         }
         public Courier()
         {
-                
+            Foods = new HashSet<Food>();       
         }
+        public virtual ICollection<Food> Foods { get; set; }
     }
 }

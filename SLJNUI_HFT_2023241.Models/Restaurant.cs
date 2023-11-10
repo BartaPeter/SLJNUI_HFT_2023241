@@ -27,10 +27,13 @@ namespace SLJNUI_HFT_2023241.Models
             StaffDb = int.Parse(strings[1]);
             RestaurantOpen = bool.Parse(strings[2]);
             RestaurantId = int.Parse(strings[3]);
+            Foods = new HashSet<Food>();
         }
         public Restaurant()
         {
+            Foods = new HashSet<Food>();
         }
 
+        public virtual ICollection<Food> Foods { get; set; }
     }
 }

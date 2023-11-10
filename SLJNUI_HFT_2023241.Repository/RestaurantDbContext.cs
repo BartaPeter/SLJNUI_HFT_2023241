@@ -31,14 +31,14 @@ namespace SLJNUI_HFT_2023241.Repository
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Food>(foods => foods
-            .HasOne<Restaurant>()
-            .WithMany()
+            .HasOne(foods => foods.restaurants)
+            .WithMany(restaurant => restaurant.Foods)
             .HasForeignKey(foods => foods.FoodId)
             .OnDelete(DeleteBehavior.Cascade));
-            modelBuilder.Entity<Courier>(couriers => couriers
-           .HasOne<Restaurant>()
-           .WithMany()
-           .HasForeignKey(couriers => couriers.CourierId)
+            modelBuilder.Entity<Food>(foods => foods
+           .HasOne(foods => foods.couriers)
+           .WithMany(courier => courier.Foods)
+           .HasForeignKey(foods => foods.FoodId)
            .OnDelete(DeleteBehavior.Cascade));
             modelBuilder.Entity<Restaurant>().HasData(new Restaurant[]
             {

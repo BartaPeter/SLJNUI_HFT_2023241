@@ -31,6 +31,7 @@ namespace SLJNUI_HFT_2023241.Models
         public Food()
         {                
         }
-
+        public virtual Restaurant restaurants { get; set; }
+        public virtual Courier couriers { get; set; }
     }
 }
