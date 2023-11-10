@@ -176,7 +176,7 @@ namespace SLJNUI_HFT_2023241.Repository
                 new Food("23#Yogurt#Cold#1800"),
                 new Food("24#Paella#Warm#12200"),
                 new Food("25#Shrimp Cocktail#Cold#6800"),
-                new Food("26#Gyros#Warm#5400"),
+                new Food("26#Gyros#Cold#5400"),
                 new Food("27#Miso Soup#Warm#2650"),
                 new Food("28#Coleslaw#Cold#2400"),
                 new Food("29#Tofu Stir-Fry#Warm#8700"),
