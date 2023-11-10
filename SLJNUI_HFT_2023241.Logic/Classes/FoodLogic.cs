@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SLJNUI_HFT_2023241.Logic
 {
-    public class FoodLogic : IFoodLogic, IFoodLogic
+    public class FoodLogic : IFoodLogic
     {
         IRepository<Food> repository;
 
