@@ -33,6 +33,7 @@ namespace SLJNUI_HFT_2023241.Models
         {
             Courier = new HashSet<Courier>();
         }
+        [NotMapped]
         public virtual ICollection<Courier> Courier { get; set; }
     }
 }

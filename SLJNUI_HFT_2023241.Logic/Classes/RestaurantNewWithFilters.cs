@@ -6,5 +6,6 @@
         public int StaffDb { get; set; }
         public bool RestaurantOpen { get; set; }
         public int RestaurantId { get; set; }
+        public string CourierName { get; set; }
     }
 }

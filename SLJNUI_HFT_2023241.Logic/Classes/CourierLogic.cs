@@ -62,6 +62,7 @@ namespace SLJNUI_HFT_2023241.Logic
                     StaffDb = t.restaurants.StaffDb,
                     RestaurantOpen = t.restaurants.RestaurantOpen,
                     RestaurantId = t.restaurants.RestaurantId,
+                    CourierName = t.CourierName,
                 });
         }
         public IEnumerable<RestaurantNewWithFilters> RestaurantsWithExactName(string name)
@@ -73,6 +74,7 @@ namespace SLJNUI_HFT_2023241.Logic
                     StaffDb = t.restaurants.StaffDb,
                     RestaurantOpen = t.restaurants.RestaurantOpen,
                     RestaurantId = t.restaurants.RestaurantId,
+                    CourierName = t.CourierName,
                 });
         }
         public IEnumerable<CourierDetails> CourierWithExactName(string name)
@@ -83,6 +85,7 @@ namespace SLJNUI_HFT_2023241.Logic
                     Id = t.CourierId,
                     Name= t.CourierName,
                     Age = t.CourierAge,
+                    RestaurantName = t.restaurants.RestaurantName,
                 });
         }
         public IEnumerable<CourierDetails> CourierWithExactId(int value)
@@ -93,6 +96,7 @@ namespace SLJNUI_HFT_2023241.Logic
                     Id = t.CourierId,
                     Name = t.CourierName,
                     Age = t.CourierAge,
+                    RestaurantName = t.restaurants.RestaurantName,
                 });
         }
     }
