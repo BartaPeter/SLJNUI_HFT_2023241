@@ -14,7 +14,7 @@ namespace SLJNUI_HFT_2023241.Client
             //{
             //    Console.WriteLine(restaurant.RestaurantId);
             //});
-            rest.Foods.ToList().ForEach(t => Console.WriteLine(t.restaurants.RestaurantName+"\t"+t.FoodName+"\t"+t.couriers.CourierName));
+            rest.Couriers.ToList().ForEach(t => Console.WriteLine(t.CourierId+"\t"+t.restaurants.RestaurantName+"\t"+t.foods.FoodName));
         }
     }
 }

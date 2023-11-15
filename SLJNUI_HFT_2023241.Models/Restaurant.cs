@@ -19,7 +19,6 @@ namespace SLJNUI_HFT_2023241.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int RestaurantId { get; set; }
-
         public Restaurant(string v)
         {
             string[] strings = v.Split('#');
@@ -27,13 +26,14 @@ namespace SLJNUI_HFT_2023241.Models
             StaffDb = int.Parse(strings[1]);
             RestaurantOpen = bool.Parse(strings[2]);
             RestaurantId = int.Parse(strings[3]);
-            Foods = new HashSet<Food>();
+            Courier = new HashSet<Courier>();
         }
         public Restaurant()
         {
-            Foods = new HashSet<Food>();
+            Courier = new HashSet<Courier>();
         }
 
-        public virtual ICollection<Food> Foods { get; set; }
+        public virtual ICollection<Courier> Courier { get; set; }
+
     }
 }

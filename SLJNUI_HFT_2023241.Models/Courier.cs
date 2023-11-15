@@ -18,19 +18,22 @@ namespace SLJNUI_HFT_2023241.Models
         public string CourierName {  get; set; }
         [Range(18, 65)]
         public int CourierAge { get; set; }
+        public int RestaurantId { get; set; }
+        public int FoodId { get; set; }
 
         public Courier(string v)
         {
             string[] strings = v.Split('#');
             CourierId = int.Parse(strings[0]);
             CourierName = strings[1];
-            CourierAge = int.Parse(strings[2]);   
-            Foods = new HashSet<Food>();
+            CourierAge = int.Parse(strings[2]);
+            RestaurantId= int.Parse(strings[3]);
+            FoodId= int.Parse(strings[4]);
         }
         public Courier()
         {
-            Foods = new HashSet<Food>();       
         }
-        public virtual ICollection<Food> Foods { get; set; }
+        public virtual Restaurant restaurants { get; set; }
+        public virtual Food foods { get; set; }
     }
 }
