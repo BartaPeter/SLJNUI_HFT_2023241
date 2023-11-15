@@ -1,6 +1,7 @@
 ﻿using SLJNUI_HFT_2023241.Models;
 using SLJNUI_HFT_2023241.Repository;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace SLJNUI_HFT_2023241.Logic
@@ -16,7 +17,7 @@ namespace SLJNUI_HFT_2023241.Logic
 
         public void Create(Restaurant item)
         {
-            if(item.StaffDb >= 5 && item.StaffDb <= 20)
+            if(item.StaffDb >= 5 && item.StaffDb <= 200)
             {
                 this.repository.Create(item);
             }
@@ -45,5 +46,6 @@ namespace SLJNUI_HFT_2023241.Logic
         {
             this.repository.Update(item);
         }
+        
     }
 }

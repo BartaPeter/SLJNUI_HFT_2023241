@@ -18,10 +18,6 @@ namespace SLJNUI_HFT_2023241.Repository
         {
             if (!builder.IsConfigured)
             {
-                //                string conn = @"Data Source=(LocalDB)\MSSQLLocalDB;
-                //AttachDbFilename=|DataDirectory|\Restaurant.mdf;Integrated Security=True;MultipleActiveResultSets=true";
-                //                builder
-                //                .UseSqlServer(conn);
                 builder
                 .UseInMemoryDatabase("Restaurants")
                 .UseLazyLoadingProxies();
