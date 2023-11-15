@@ -16,7 +16,14 @@ namespace SLJNUI_HFT_2023241.Logic
 
         public void Create(Restaurant item)
         {
-            this.repository.Create(item);
+            if(item.StaffDb >= 5 && item.StaffDb <= 20)
+            {
+                this.repository.Create(item);
+            }
+            else
+            {
+                throw new ArgumentException("Staff number is less or more than the required.");
+            }
         }
 
         public void Delete(int id)

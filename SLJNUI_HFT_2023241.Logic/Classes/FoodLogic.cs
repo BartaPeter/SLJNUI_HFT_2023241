@@ -19,7 +19,14 @@ namespace SLJNUI_HFT_2023241.Logic
 
         public void Create(Food item)
         {
-            this.repository.Create(item);
+            if(item.FoodType == "Warm" || item.FoodType == "Cold")
+            {
+                this.repository.Create(item);
+            }
+            else
+            {
+                throw new ArgumentException("Not supported FoodType.");
+            }
         }
 
         public void Delete(int id)

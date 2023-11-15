@@ -19,7 +19,14 @@ namespace SLJNUI_HFT_2023241.Logic
 
         public void Create(Courier item)
         {
-            this.repository.Create(item);
+            if(item.CourierAge >= 18 && item.CourierAge <= 65)
+            {
+                this.repository.Create(item);
+            }
+            else
+            {
+                throw new ArgumentException("Codded age is not suitable for the courier job.");
+            }
         }
 
         public void Delete(int id)
