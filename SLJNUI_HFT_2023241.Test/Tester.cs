@@ -312,6 +312,18 @@ namespace SLJNUI_HFT_2023241.Test
             Assert.That(result, Is.EqualTo(expected));
         }
         [Test]
+        public void ListByRestaurantNameTest()
+        {
+            var result = courierlogic.ListByRestaurantName("TestRestaurant1");
+
+            var excepted = new List<string>()
+            {
+                "Test1", "Test2"
+            };
+
+            Assert.That(result, Is.EqualTo(excepted));
+        }
+        [Test]
         public void RestaurantWithAvgFoodPriceTest()
         {
             var result = courierlogic.RestaurantsWithAvgFoodPrice();
@@ -330,9 +342,40 @@ namespace SLJNUI_HFT_2023241.Test
 
             Assert.That(result, Is.EqualTo(expected));
         }
-    }
+        [Test]
+        public void RestaurantsAvgStaffTester()
+        {
+            var result = courierlogic.RestaurantsSumStaff();
 
-        
+            var expected = new List<KeyValuePair<string, double>>()
+            {
+                new KeyValuePair<string, double>("TestRestaurant1", 400),
+                new KeyValuePair<string, double>("TestRestaurant2", 600),
+                new KeyValuePair<string, double>("TestRestaurant3", 250),
+                new KeyValuePair<string, double>("TestRestaurant4", 220),
+                new KeyValuePair<string, double>("TestRestaurant5", 150),
+                new KeyValuePair<string, double>("TestRestaurant8", 50),
+                new KeyValuePair<string, double>("TestRestaurant9", 90),
+                new KeyValuePair<string, double>("TestRestaurant10", 40),
+            };
+
+            Assert.That(result, Is.EqualTo(expected));
+        }
+        [Test]
+        public void CountByFoodsTest()
+        {
+            var result = courierlogic.CountByFoods();
+
+            var excepted = new List<KeyValuePair<string, int>>()
+            {
+                new KeyValuePair<string, int>("TestFood1", 5),
+                new KeyValuePair<string, int>("TestFood2", 5),
+            };
+
+            Assert.That(result, Is.EqualTo(excepted));
+        }
+
+    }       
 
 }
 
