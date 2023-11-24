@@ -1,4 +1,5 @@
-﻿using SLJNUI_HFT_2023241.Models;
+﻿using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
+using SLJNUI_HFT_2023241.Models;
 using SLJNUI_HFT_2023241.Repository;
 using System;
 using System.Collections.Generic;
@@ -53,17 +54,9 @@ namespace SLJNUI_HFT_2023241.Logic
         {
             return repository.ReadAll().Where(t => t.restaurants.RestaurantName == input).Average(a => a.CourierAge);
         }
-        public IEnumerable<RestaurantNewWithFilters> RestaurantWithExactId(int value)
+        public IQueryable<Courier> RestaurantWithExactId(int value)
         {
-            return repository.ReadAll().Where(t => t.restaurants.RestaurantId == value)
-                .Select(t => new RestaurantNewWithFilters
-                {
-                    Name = t.restaurants.RestaurantName,
-                    StaffDb = t.restaurants.StaffDb,
-                    RestaurantOpen = t.restaurants.RestaurantOpen,
-                    RestaurantId = t.restaurants.RestaurantId,
-                    CourierName = t.CourierName,
-                });
+            return this.repository.ReadAll().Where(t => t.restaurants.RestaurantId == value);  
         }
         public IEnumerable<RestaurantNewWithFilters> RestaurantsWithExactName(string name)
         {

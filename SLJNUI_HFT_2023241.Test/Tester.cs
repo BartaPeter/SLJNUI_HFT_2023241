@@ -1,4 +1,5 @@
-﻿using Moq;
+﻿using Microsoft.EntityFrameworkCore.Diagnostics;
+using Moq;
 using NUnit.Framework;
 using SLJNUI_HFT_2023241.Logic;
 using SLJNUI_HFT_2023241.Models;
@@ -283,6 +284,21 @@ namespace SLJNUI_HFT_2023241.Test
             double answer = courierlogic.AvgCourierAge("TestRestaurant1");
             Assert.That(answer,Is.EqualTo(29));
 
+        }
+        [Test]
+        public void RestaurantWithExactIdTester()
+        {
+            var result = courierlogic.RestaurantWithExactId(2);
+
+            var expected = new Restaurant()
+            {
+                RestaurantId = 2,
+                RestaurantName = "TestRestaurant2",
+                RestaurantOpen = false,
+                StaffDb = 300
+            };
+            var resultList = result.ToList();
+            Assert.That(resultList[0].restaurants.RestaurantId == expected.RestaurantId && resultList[0].restaurants.RestaurantName == expected.RestaurantName && resultList[0].restaurants.RestaurantOpen == expected.RestaurantOpen && resultList[0].restaurants.StaffDb == expected.StaffDb);
         }
     }
 
