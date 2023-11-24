@@ -15,7 +15,8 @@ namespace SLJNUI_HFT_2023241.Client
             CourierLogic restaurantlogic = new CourierLogic(repo);
             rest.Couriers.ToList().ForEach(t => Console.WriteLine(t.CourierId+"\t"+t.restaurants.RestaurantName+"\t"+t.foods.FoodName));
             Console.WriteLine();
-            var teszt = restaurantlogic.RestaurantsWithExactName("McDonald's");
+            var teszt = restaurantlogic.AvgCourierAge("McDonald's");
+            ;
         }
     }
 }
