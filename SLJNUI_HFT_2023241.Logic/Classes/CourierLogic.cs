@@ -58,39 +58,30 @@ namespace SLJNUI_HFT_2023241.Logic
         {
             return this.repository.ReadAll().Where(t => t.restaurants.RestaurantId == value);  
         }
-        public IEnumerable<RestaurantNewWithFilters> RestaurantsWithExactName(string name)
+        public IEnumerable<KeyValuePair<string,int>> FoodsWithSumFoodPrice()
         {
-            return repository.ReadAll().Where(t => t.restaurants.RestaurantName == name)
-                .Select(t => new RestaurantNewWithFilters
-                {
-                    Name = t.restaurants.RestaurantName,
-                    StaffDb = t.restaurants.StaffDb,
-                    RestaurantOpen = t.restaurants.RestaurantOpen,
-                    RestaurantId = t.restaurants.RestaurantId,
-                    CourierName = t.CourierName,
-                });
+            return from x in repository.ReadAll()
+                   group x by x.foods.FoodName into g
+                   select new KeyValuePair<string, int>
+                   (g.Key, g.Sum(t => t.foods.FoodPrice));
         }
-        public IEnumerable<CourierDetails> CourierWithExactName(string name)
+        public IEnumerable<KeyValuePair<string, double>> RestaurantsWithAvgFoodPrice()
         {
-            return repository.ReadAll().Where(t => t.CourierName == name)
-                .Select(t => new CourierDetails
-                {
-                    Id = t.CourierId,
-                    Name= t.CourierName,
-                    Age = t.CourierAge,
-                    RestaurantName = t.restaurants.RestaurantName,
-                });
+            return from x in repository.ReadAll()
+                   group x by x.restaurants.RestaurantName into g
+                   select new KeyValuePair<string, double>
+                   (g.Key, g.Average(t => t.foods.FoodPrice));
         }
-        public IEnumerable<CourierDetails> CourierWithExactId(int value)
-        {
-            return repository.ReadAll().Where(t => t.CourierId == value)
-                .Select(t => new CourierDetails
-                {
-                    Id = t.CourierId,
-                    Name = t.CourierName,
-                    Age = t.CourierAge,
-                    RestaurantName = t.restaurants.RestaurantName,
-                });
-        }
+        //public IEnumerable<CourierDetails> CourierWithExactId(int value)
+        //{
+        //    return repository.ReadAll().Where(t => t.CourierId == value)
+        //        .Select(t => new CourierDetails
+        //        {
+        //            Id = t.CourierId,
+        //            Name = t.CourierName,
+        //            Age = t.CourierAge,
+        //            RestaurantName = t.restaurants.RestaurantName,
+        //        });
+        //}
     }
 }

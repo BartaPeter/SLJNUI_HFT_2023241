@@ -174,7 +174,7 @@ namespace SLJNUI_HFT_2023241.Test
                 CourierName = "Test2",
                 CourierAge = 40,
                 restaurants = fakeRestaurant1,
-                foods = fakefood2
+                foods = fakefood1
             },
             new Courier()
             {
@@ -182,39 +182,39 @@ namespace SLJNUI_HFT_2023241.Test
                 CourierName = "Test3",
                 CourierAge = 50,
                 restaurants = fakeRestaurant2,
-                foods = fakefood3
+                foods = fakefood1
             },
             new Courier()
             {
                 CourierId = 4,
                 CourierName = "Test4",
                 CourierAge = 20,
-                restaurants = fakeRestaurant4,
-                foods = fakefood4
+                restaurants = fakeRestaurant2,
+                foods = fakefood1
             },
             new Courier()
             {
                 CourierId = 5,
                 CourierName = "Test5",
                 CourierAge = 55,
-                restaurants = fakeRestaurant5,
-                foods = fakefood5
+                restaurants = fakeRestaurant3,
+                foods = fakefood1
             },
             new Courier()
             {
                 CourierId = 6,
                 CourierName = "Test6",
                 CourierAge = 40,
-                restaurants = fakeRestaurant5,
-                foods = fakefood6
+                restaurants = fakeRestaurant4,
+                foods = fakefood2
             },
             new Courier()
             {
                 CourierId = 7,
                 CourierName = "Test7",
                 CourierAge = 19,
-                restaurants = fakeRestaurant3,
-                foods = fakefood7
+                restaurants = fakeRestaurant5,
+                foods = fakefood2
             },
             new Courier()
             {
@@ -222,7 +222,7 @@ namespace SLJNUI_HFT_2023241.Test
                 CourierName = "Test8",
                 CourierAge = 28,
                 restaurants = fakeRestaurant8,
-                foods = fakefood8
+                foods = fakefood2
             },
             new Courier()
             {
@@ -230,7 +230,7 @@ namespace SLJNUI_HFT_2023241.Test
                 CourierName = "Test9",
                 CourierAge = 21,
                 restaurants = fakeRestaurant9,
-                foods = fakefood9
+                foods = fakefood2
             },
             new Courier()
             {
@@ -238,7 +238,7 @@ namespace SLJNUI_HFT_2023241.Test
                 CourierName = "Test10",
                 CourierAge = 50,
                 restaurants = fakeRestaurant10,
-                foods = fakefood10
+                foods = fakefood2
             },
         };
             mockCourierRepository = new Mock<IRepository<Courier>>();
@@ -251,9 +251,7 @@ namespace SLJNUI_HFT_2023241.Test
         public void MovieCreatewithCorrectTest()
         {
             var sample = new Courier() { CourierId = 1, CourierName = "Zoli", CourierAge = 18, RestaurantId = 10, FoodId = 9 };
-            //ACT
             courierlogic.Create(sample);
-            //ASSERT
             mockCourierRepository.Verify(
             m => m.Create(sample),
             Times.Once);
@@ -299,6 +297,38 @@ namespace SLJNUI_HFT_2023241.Test
             };
             var resultList = result.ToList();
             Assert.That(resultList[0].restaurants.RestaurantId == expected.RestaurantId && resultList[0].restaurants.RestaurantName == expected.RestaurantName && resultList[0].restaurants.RestaurantOpen == expected.RestaurantOpen && resultList[0].restaurants.StaffDb == expected.StaffDb);
+        }
+        [Test]
+        public void FoodsWithAvgFoodPriceTest()
+        {
+            var result = courierlogic.FoodsWithSumFoodPrice();
+
+            var expected = new List<KeyValuePair<string, int>>()
+            {
+                new KeyValuePair<string, int>("TestFood1", 5000),
+                new KeyValuePair<string, int>("TestFood2", 12500)
+            };
+
+            Assert.That(result, Is.EqualTo(expected));
+        }
+        [Test]
+        public void RestaurantWithAvgFoodPriceTest()
+        {
+            var result = courierlogic.RestaurantsWithAvgFoodPrice();
+
+            var expected = new List<KeyValuePair<string, double>>()
+            {
+                new KeyValuePair<string, double>("TestRestaurant1", 1000),
+                new KeyValuePair<string, double>("TestRestaurant2", 1000),
+                new KeyValuePair<string, double>("TestRestaurant3", 1000),
+                new KeyValuePair<string, double>("TestRestaurant4", 2500),
+                new KeyValuePair<string, double>("TestRestaurant5", 2500),
+                new KeyValuePair<string, double>("TestRestaurant8", 2500),
+                new KeyValuePair<string, double>("TestRestaurant9", 2500),
+                new KeyValuePair<string, double>("TestRestaurant10", 2500),
+            };
+
+            Assert.That(result, Is.EqualTo(expected));
         }
     }
 
