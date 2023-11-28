@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 
 namespace SLJNUI_HFT_2023241.Models
 {
@@ -33,6 +34,7 @@ namespace SLJNUI_HFT_2023241.Models
             Courier = new HashSet<Courier>();
         }
         [NotMapped]
+        [JsonIgnore]
         public virtual ICollection<Courier> Courier { get; set; }
 
     }

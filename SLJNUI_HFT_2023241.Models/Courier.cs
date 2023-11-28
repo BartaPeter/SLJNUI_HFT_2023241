@@ -33,7 +33,9 @@ namespace SLJNUI_HFT_2023241.Models
         public Courier()
         {
         }
+        [NotMapped]
         public virtual Restaurant restaurants { get; set; }
+        [NotMapped]
         public virtual Food foods { get; set; }
     }
 }

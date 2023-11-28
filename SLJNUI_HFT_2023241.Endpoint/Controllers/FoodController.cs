@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using SLJNUI_HFT_2023241.Logic;
+using SLJNUI_HFT_2023241.Models;
+using System.Collections.Generic;
 
 namespace SLJNUI_HFT_2023241.Endpoint.Controllers
 {
@@ -8,36 +9,40 @@ namespace SLJNUI_HFT_2023241.Endpoint.Controllers
     [ApiController]
     public class FoodController : ControllerBase
     {
-        // GET: api/<FoodController>
+        IFoodLogic logic;
+
+        public FoodController(IFoodLogic logic)
+        {
+            this.logic = logic;
+        }
+
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<Food> ReadAll()
         {
-            return new string[] { "value1", "value2" };
+            return this.logic.ReadAll();
         }
 
-        // GET api/<FoodController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public Food Read(int id)
         {
-            return "value";
+            return this.logic.Read(id);
         }
 
-        // POST api/<FoodController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Create([FromBody] Food value)
         {
+            this.logic.Create(value);
         }
-
-        // PUT api/<FoodController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Update([FromBody] Food value)
         {
+            this.logic.Update(value);
         }
 
-        // DELETE api/<FoodController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            this.logic.Delete(id);
         }
     }
 }
