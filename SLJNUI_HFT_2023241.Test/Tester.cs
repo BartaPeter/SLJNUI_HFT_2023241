@@ -248,7 +248,7 @@ namespace SLJNUI_HFT_2023241.Test
         }
 
         [Test]
-        public void MovieCreatewithCorrectTest()
+        public void CourierCreatewithCorrectTest()
         {
             var sample = new Courier() { CourierId = 1, CourierName = "Zoli", CourierAge = 18, RestaurantId = 10, FoodId = 9 };
             courierlogic.Create(sample);
@@ -257,7 +257,7 @@ namespace SLJNUI_HFT_2023241.Test
             Times.Once);
         }
         [Test]
-        public void MovieCreatewithIncorrectTest()
+        public void CourierCreatewithIncorrectTest()
         {
             var sample = new Courier() { CourierId = 1, CourierName = "Zoli", CourierAge = 15, RestaurantId = 10, FoodId = 9 };
             try

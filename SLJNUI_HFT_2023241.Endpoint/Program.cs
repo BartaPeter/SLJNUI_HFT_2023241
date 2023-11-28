@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using SLJNUI_HFT_2023241.Endpoint;
+using SLJUNI_HFT_2023241.Endpoint;
 using System;
 using System.Collections.Generic;
 using System.Linq;
