@@ -33,7 +33,7 @@ namespace SLJNUI_HFT_2023241.Endpoint.Controllers
         {
             this.logic.Create(value);
         }
-        [HttpPut("{id}")]
+        [HttpPut]
         public void Update([FromBody] Restaurant value)
         {
             this.logic.Update(value);

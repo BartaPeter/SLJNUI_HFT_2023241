@@ -65,8 +65,8 @@ namespace SLJNUI_HFT_2023241.Client
             }
             else
             {
-                var error = response.Content.ReadAsAsync<RestExceptionInfo>().GetAwaiter().GetResult();
-                throw new ArgumentException(error.Msg);
+                    var error = response.Content.ReadAsAsync<RestExceptionInfo>().GetAwaiter().GetResult();
+                    throw new ArgumentException(error.Msg);            
             }
             return items;
         }
@@ -105,15 +105,15 @@ namespace SLJNUI_HFT_2023241.Client
 
         public void Post<T>(T item, string endpoint)
         {
-            HttpResponseMessage response =
+            HttpResponseMessage response = 
                 client.PostAsJsonAsync(endpoint, item).GetAwaiter().GetResult();
+                if (!response.IsSuccessStatusCode)
+                {
+                    var error = response.Content.ReadAsAsync<RestExceptionInfo>().GetAwaiter().GetResult();
+                    throw new ArgumentException(error.Msg);
+                }
+                response.EnsureSuccessStatusCode();
 
-            if (!response.IsSuccessStatusCode)
-            {
-                var error = response.Content.ReadAsAsync<RestExceptionInfo>().GetAwaiter().GetResult();
-                throw new ArgumentException(error.Msg);
-            }
-            response.EnsureSuccessStatusCode();
         }
 
         public void Delete(int id, string endpoint)
@@ -135,11 +135,16 @@ namespace SLJNUI_HFT_2023241.Client
             HttpResponseMessage response =
                 client.PutAsJsonAsync(endpoint, item).GetAwaiter().GetResult();
 
-            if (!response.IsSuccessStatusCode)
-            {
-                var error = response.Content.ReadAsAsync<RestExceptionInfo>().GetAwaiter().GetResult();
-                throw new ArgumentException(error.Msg);
-            }
+
+
+                    if (!response.IsSuccessStatusCode)
+                {
+                    var error = response.Content.ReadAsAsync<RestExceptionInfo>().GetAwaiter().GetResult();
+                    throw new ArgumentException(error.Msg);
+
+                }
+                
+
 
             response.EnsureSuccessStatusCode();
         }

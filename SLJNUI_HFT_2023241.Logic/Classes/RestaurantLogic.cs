@@ -17,7 +17,7 @@ namespace SLJNUI_HFT_2023241.Logic
 
         public void Create(Restaurant item)
         {
-            if(item.StaffDb >= 5 && item.StaffDb <= 200)
+            if(item.StaffDb >= 5 && item.StaffDb <= 2000)
             {
                 this.repository.Create(item);
             }

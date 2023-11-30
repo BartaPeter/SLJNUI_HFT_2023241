@@ -16,19 +16,27 @@ namespace SLJNUI_HFT_2023241.Client
             {
                 Console.Write("Enter Courier Name: ");
                 string name = Console.ReadLine();
-                rest.Post(new Courier() { CourierName = name }, "Courier");
+                Console.Write("Enter Courier Age: ");
+                int age = int.Parse(Console.ReadLine());
+                rest.Post(new Courier() { CourierName = name, CourierAge = age }, "courier");
             }
             else if(entity == "Restaurant")
             {
                 Console.Write("Enter Restaurant Name: ");
                 string name = Console.ReadLine();
-                rest.Post(new Restaurant() { RestaurantName = name }, "restaurant");
+                Console.Write("Enter Restaurant Staff Number: ");
+                int number = int.Parse(Console.ReadLine());
+                rest.Post(new Restaurant() { RestaurantName = name, StaffDb = number }, "api/restaurant");
             }
             else if (entity == "Food")
             {
                 Console.Write("Enter Food Name: ");
                 string name = Console.ReadLine();
-                rest.Post(new Food() { FoodName = name }, "food");
+                Console.Write("Enter Food Type: ");
+                string type = Console.ReadLine();
+                Console.Write("Enter Food Price: ");
+                int price = int.Parse(Console.ReadLine());
+                rest.Post(new Food() { FoodName = name , FoodType = type, FoodPrice = price}, "api/food");
             }
         }
         static void List(string entity)
@@ -43,15 +51,15 @@ namespace SLJNUI_HFT_2023241.Client
             }
             else if (entity == "Restaurant")
             {
-                List<Restaurant> restaurants = rest.Get<Restaurant>("restaurant");
+                List<Restaurant> restaurants = rest.Get<Restaurant>("api/restaurant");
                 foreach (var item in restaurants)
                 {
-                    Console.WriteLine(item.RestaurantId + ": " + item.RestaurantName + ": " + item.RestaurantOpen + ": " + item.StaffDb);
+                    Console.WriteLine(item.RestaurantId + ": " + item.RestaurantName /*+ ": " + item.RestaurantOpen + ": " + item.StaffDb*/);
                 }
             }
             else if (entity == "Food")
             {
-                List<Food> foods = rest.Get<Food>("food");
+                List<Food> foods = rest.Get<Food>("api/food");
                 foreach (var item in foods)
                 {
                     Console.WriteLine(item.FoodId + ": " + item.FoodName + ": " + item.FoodType + ": " + item.FoodPrice);
@@ -71,25 +79,26 @@ namespace SLJNUI_HFT_2023241.Client
                 one.CourierName = name;
                 rest.Put(one, "courier");
             }
+ 
             else if (entity == "Restaurant")
             {
                 Console.Write("Enter Restaurant's id to update: ");
                 int id = int.Parse(Console.ReadLine());
-                Restaurant one = rest.Get<Restaurant>(id, "restaurant");
+                Restaurant one = rest.Get<Restaurant>(id, "api/restaurant");
                 Console.Write($"New name [old: {one.RestaurantName}]: ");
                 string name = Console.ReadLine();
                 one.RestaurantName = name;
-                rest.Put(one, "restaurant");
+                rest.Put(one, "api/restaurant");
             }
             else if (entity == "Food")
             {
                 Console.Write("Enter Food's id to update: ");
                 int id = int.Parse(Console.ReadLine());
-                Food one = rest.Get<Food>(id, "food");
+                Food one = rest.Get<Food>(id, "api/food");
                 Console.Write($"New name [old: {one.FoodName}]: ");
                 string name = Console.ReadLine();
                 one.FoodName = name;
-                rest.Put(one, "foodname");
+                rest.Put(one, "api/food");
             }
         }
         static void Delete(string entity)
@@ -104,13 +113,13 @@ namespace SLJNUI_HFT_2023241.Client
             {
                 Console.Write("Enter Restaurant's id to delete: ");
                 int id = int.Parse(Console.ReadLine());
-                rest.Delete(id, "restaurant");
+                rest.Delete(id, "api/restaurant");
             }
             else if (entity == "Food")
             {
                 Console.Write("Enter Food's id to delete: ");
                 int id = int.Parse(Console.ReadLine());
-                rest.Delete(id, "food");
+                rest.Delete(id, "api/food");
             }
         }
         static void AvgCourierAgeConsole()
@@ -143,6 +152,16 @@ namespace SLJNUI_HFT_2023241.Client
             }
             Console.ReadLine();
         }
+        static void FoodsWithSumFoodPriceConsole()
+        {
+            var result = rest.Get<KeyValuePair<string, int>>($"Stat/FoodsWithSumFoodPrice");
+            foreach (KeyValuePair<string,int> item in result)
+            {
+                Console.WriteLine(item.Key + ": "+ item.Value);
+            }
+            Console.ReadLine();
+        }
+
         static void Main(string[] args)
         {
             rest = new RestService("http://localhost:49617/", "courier");
@@ -172,7 +191,7 @@ namespace SLJNUI_HFT_2023241.Client
                 .Add("AvgCourierAge", () => AvgCourierAgeConsole())
                 .Add("RestaurantWithExactId", () => RestaurantWithExactIdConsole())
                 .Add("ListByRestaurantName", () => ListByRestaurantNameConsole())
-                .Add("Update", () => Update("Movie"))
+                .Add("FoodsWithSumFoodPrice", () => FoodsWithSumFoodPriceConsole())
                 .Add("Exit", ConsoleMenu.Close);
 
 
@@ -180,7 +199,7 @@ namespace SLJNUI_HFT_2023241.Client
                 .Add("Couriers", () => courierSubMenu.Show())
                 .Add("Restaurants", () => restaurantSubMenu.Show())
                 .Add("Foods", () => foodSubMenu.Show())
-                .Add("", () => noncrudSubMenu.Show())
+                .Add("NonCruds", () => noncrudSubMenu.Show())
                 .Add("Exit", ConsoleMenu.Close);
 
             menu.Show();

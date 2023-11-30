@@ -12,10 +12,10 @@ namespace SLJNUI_HFT_2023241.Models
     public class Restaurant
     {
         [StringLength(240)]
+        [Required]
         public string RestaurantName { get; set; }
         [Range(5, 2000)]
         public int StaffDb { get; set; }
-        [Required]
         public bool RestaurantOpen { get; set; }
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,9 +24,13 @@ namespace SLJNUI_HFT_2023241.Repository
             var old = Read(item.CourierId);
             foreach (var prop in old.GetType().GetProperties())
             {
-                prop.SetValue(old, prop.GetValue(item));
+                if (prop.GetAccessors().FirstOrDefault(t => t.IsVirtual) == null)
+                {
+                    prop.SetValue(old, prop.GetValue(item));
+                }
             }
             ctx.SaveChanges();
+
         }
     }
 }
