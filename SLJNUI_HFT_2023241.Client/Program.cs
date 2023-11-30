@@ -161,7 +161,33 @@ namespace SLJNUI_HFT_2023241.Client
             }
             Console.ReadLine();
         }
-
+        static void RestaurantsWithAvgFoodPriceConsole()
+        {
+            var result = rest.Get<KeyValuePair<string, double>>("Stat/RestaurantsWithAvgFoodPrice");
+            foreach (KeyValuePair<string, double> item in result)
+            {
+                Console.WriteLine(item.Key + ": " + item.Value);
+            }
+            Console.ReadLine();
+        }
+        static void RestaurantsSumStaffConsole()
+        {
+            var result = rest.Get<KeyValuePair<string, double>>("Stat/RestaurantsSumStaff");
+            foreach (KeyValuePair<string, double> item in result)
+            {
+                Console.WriteLine(item.Key + ": " + item.Value);
+            }
+            Console.ReadLine();
+        }
+        static void CountByFoodsConsole()
+        {
+            var result = rest.Get<KeyValuePair<string, int>>("Stat/CountByFoods");
+            foreach (KeyValuePair<string, int> item in result)
+            {
+                Console.WriteLine(item.Key + ": " + item.Value);
+            }
+            Console.ReadLine();
+        }
         static void Main(string[] args)
         {
             rest = new RestService("http://localhost:49617/", "courier");
@@ -192,6 +218,9 @@ namespace SLJNUI_HFT_2023241.Client
                 .Add("RestaurantWithExactId", () => RestaurantWithExactIdConsole())
                 .Add("ListByRestaurantName", () => ListByRestaurantNameConsole())
                 .Add("FoodsWithSumFoodPrice", () => FoodsWithSumFoodPriceConsole())
+                .Add("RestaurantsWithAvgFoodPrice", () => RestaurantsWithAvgFoodPriceConsole())
+                .Add("RestaurantsSumStaff", () => RestaurantsSumStaffConsole())
+                .Add("CountByFoods", () => CountByFoodsConsole())
                 .Add("Exit", ConsoleMenu.Close);
 
 
@@ -199,7 +228,7 @@ namespace SLJNUI_HFT_2023241.Client
                 .Add("Couriers", () => courierSubMenu.Show())
                 .Add("Restaurants", () => restaurantSubMenu.Show())
                 .Add("Foods", () => foodSubMenu.Show())
-                .Add("NonCruds", () => noncrudSubMenu.Show())
+                .Add("Methods", () => noncrudSubMenu.Show())
                 .Add("Exit", ConsoleMenu.Close);
 
             menu.Show();

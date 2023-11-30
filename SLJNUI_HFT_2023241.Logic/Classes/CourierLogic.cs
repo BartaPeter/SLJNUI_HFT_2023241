@@ -73,14 +73,14 @@ namespace SLJNUI_HFT_2023241.Logic
         }
         public IEnumerable<KeyValuePair<string, double>> RestaurantsWithAvgFoodPrice()
         {
-            return from x in repository.ReadAll()
+            return from x in repository.ReadAll().ToList()
                    group x by x.restaurants.RestaurantName into g
                    select new KeyValuePair<string, double>
                    (g.Key, g.Average(t => t.foods.FoodPrice));
         }
         public IEnumerable<KeyValuePair<string,double>> RestaurantsSumStaff()
         {
-            return from y in repository.ReadAll()
+            return from y in repository.ReadAll().ToList()
                    group y by y.restaurants.RestaurantName into g
                    select new KeyValuePair<string, double>
                    (g.Key, g.Sum(t => t.restaurants.StaffDb));
