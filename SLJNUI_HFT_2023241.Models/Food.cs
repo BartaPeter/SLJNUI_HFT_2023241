@@ -15,6 +15,7 @@ namespace SLJNUI_HFT_2023241.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int FoodId { get; set; }
+        [StringLength(240)]
         public string FoodName { get; set; }
         public string FoodType { get; set; }
         [Range(1000, 50000)]

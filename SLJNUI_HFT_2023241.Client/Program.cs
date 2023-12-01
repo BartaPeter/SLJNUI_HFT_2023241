@@ -12,22 +12,31 @@ namespace SLJNUI_HFT_2023241.Client
         static RestService rest;
         static void Create(string entity)
         {
+            //Kriterium miatt csak 18-65 kozott lehet az eletkor, nev max 240 betu
             if (entity == "Courier")
             {
                 Console.Write("Enter Courier Name: ");
                 string name = Console.ReadLine();
                 Console.Write("Enter Courier Age: ");
                 int age = int.Parse(Console.ReadLine());
-                rest.Post(new Courier() { CourierName = name, CourierAge = age }, "courier");
+                Console.Write("Enter RestaurantId: ");
+                int restid = int.Parse(Console.ReadLine());
+                Console.Write("Enter FoodId: ");
+                int foodid = int.Parse(Console.ReadLine());
+                rest.Post(new Courier() { CourierName = name, CourierAge = age, RestaurantId = restid, FoodId = foodid }, "courier");
             }
+            //Kritérium miatt a staff number 5 es 2000 kozott kell lennie, nev max 240 betu.
             else if(entity == "Restaurant")
             {
                 Console.Write("Enter Restaurant Name: ");
                 string name = Console.ReadLine();
                 Console.Write("Enter Restaurant Staff Number: ");
                 int number = int.Parse(Console.ReadLine());
-                rest.Post(new Restaurant() { RestaurantName = name, StaffDb = number }, "api/restaurant");
+                Console.Write("Enter if the restaurant is open or closed (true/false)");
+                bool restopen = bool.Parse(Console.ReadLine());
+                rest.Post(new Restaurant() { RestaurantName = name, StaffDb = number, RestaurantOpen = restopen }, "api/restaurant");
             }
+            //Kritérium miatt Type csak "Warm" vagy "Cold" lehet, Price 1000 es 50000 kozott, nev max 240 betu.
             else if (entity == "Food")
             {
                 Console.Write("Enter Food Name: ");
@@ -36,7 +45,7 @@ namespace SLJNUI_HFT_2023241.Client
                 string type = Console.ReadLine();
                 Console.Write("Enter Food Price: ");
                 int price = int.Parse(Console.ReadLine());
-                rest.Post(new Food() { FoodName = name , FoodType = type, FoodPrice = price}, "api/food");
+                rest.Post(new Food() { FoodName = name , FoodType = type, FoodPrice = price }, "api/food");
             }
         }
         static void List(string entity)
@@ -46,7 +55,7 @@ namespace SLJNUI_HFT_2023241.Client
                 List<Courier> couriers = rest.Get<Courier>("courier");
                 foreach (var item in couriers)
                 {
-                    Console.WriteLine(item.CourierId + ": " + item.CourierName + ": " + item.CourierAge);
+                    Console.WriteLine(item.CourierId + ": " + item.CourierName + ": " + item.CourierAge + ": Restaurants:   " + item.restaurants.RestaurantName + ": Foods:   " + item.foods.FoodName);
                 }
             }
             else if (entity == "Restaurant")
@@ -54,7 +63,7 @@ namespace SLJNUI_HFT_2023241.Client
                 List<Restaurant> restaurants = rest.Get<Restaurant>("api/restaurant");
                 foreach (var item in restaurants)
                 {
-                    Console.WriteLine(item.RestaurantId + ": " + item.RestaurantName /*+ ": " + item.RestaurantOpen + ": " + item.StaffDb*/);
+                    Console.WriteLine(item.RestaurantId + ": " + item.RestaurantName + ": " + item.StaffDb + ": " + item.RestaurantOpen);
                 }
             }
             else if (entity == "Food")
